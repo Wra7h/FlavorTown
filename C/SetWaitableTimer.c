@@ -1,4 +1,4 @@
-// Wra7h\FlavorTown
+// Wra7h/FlavorTown
 // Written/Compiled: Visual Studio 2022
 // Usage: this.exe <shellcode file>
 

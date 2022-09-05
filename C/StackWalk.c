@@ -1,12 +1,11 @@
-// Wra7h\FlavorTown
+// Wra7h/FlavorTown
 // Written/Compiled: Visual Studio 2022
 // Usage: this.exe <shellcode file>
+#pragma comment(lib, "DbgHelp.lib")
 
 #include <stdio.h>
 #include <Windows.h>
 #include <dbghelp.h>
-
-#pragma comment(lib, "DbgHelp.lib")
 
 BOOL ReadContents(PWSTR Filepath, PCHAR* Buffer, PDWORD BufferSize);
 

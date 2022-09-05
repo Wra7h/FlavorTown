@@ -1,12 +1,11 @@
-// Wra7h\FlavorTown
+// Wra7h/FlavorTown
 // Written/Compiled: Visual Studio 2022
 // Usage: this.exe <shellcode file>
+#pragma comment(lib, "Wevtapi.lib")
 
 #include <stdio.h>
 #include <Windows.h>
 #include <winevt.h>
-
-#pragma comment(lib, "Wevtapi.lib")
 
 BOOL ReadContents(PWSTR Filepath, PCHAR* Buffer, PDWORD BufferSize);
 

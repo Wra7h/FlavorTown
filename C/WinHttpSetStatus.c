@@ -1,12 +1,11 @@
-// Wra7h\FlavorTown
+// Wra7h/FlavorTown
 // Written/Compiled: Visual Studio 2022
 // Usage: this.exe <shellcode file>
+#pragma comment(lib, "winhttp.lib")
 
 #include <stdio.h>
 #include <Windows.h>
 #include <winhttp.h>
-
-#pragma comment(lib, "winhttp.lib")
 
 BOOL ReadContents(PWSTR Filepath, PCHAR* Buffer, PDWORD BufferSize);
 

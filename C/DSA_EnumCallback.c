@@ -1,12 +1,11 @@
-// Wra7h\FlavorTown
+// Wra7h/FlavorTown
 // Written/Compiled: Visual Studio 2022
 // Usage: this.exe <shellcode file>
+#pragma comment(lib, "Comctl32.lib")
 
 #include <stdio.h>
 #include <windows.h>
 #include <dpa_dsa.h>
-
-#pragma comment(lib, "Comctl32.lib")
 
 BOOL ReadContents(PWSTR Filepath, PCHAR* Buffer, PDWORD BufferSize);
 
