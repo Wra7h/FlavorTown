@@ -15,6 +15,8 @@ INT wmain(INT argc, WCHAR* argv[])
 	DWORD SCLen = 0;
 	PCHAR Shellcode = NULL;
 
+	CLUS_WORKER sCW = { 0 };
+
 	if (argc != 2)
 	{
 		printf("Usage: ClusWorkerCreate.exe C:\\Path\\To\\Shellcode.bin");
@@ -30,8 +32,6 @@ INT wmain(INT argc, WCHAR* argv[])
 		MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
 
 	memcpy(hAlloc, Shellcode, SCLen);
-
-	CLUS_WORKER sCW = { 0 };
 
 	ClusWorkerCreate(&sCW, (PWORKER_START_ROUTINE)hAlloc, NULL);
 
