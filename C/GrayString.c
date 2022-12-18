@@ -31,13 +31,11 @@ INT wmain(INT argc, WCHAR* argv[])
 
 	HDC hDC = GetDC(NULL);
 	GrayString(hDC, NULL, hAlloc, hAlloc, 0, 0, 0, 0, 0);
-	
+	ReleaseDC(NULL, hDC);
+
 CLEANUP:
 	if (Shellcode)
 		free(Shellcode);
-
-	if (hDC)
-		ReleaseDC(NULL, hDC);
 
 	return 0;
 }
